@@ -1,0 +1,25 @@
+# Ignore Python bytecode files
+*.pyc
+__pycache__/
+
+# Ignore common directories and files
+.idea
+.env
+*.log
+*.pid
+logs
+cover
+.coverage
+*.sql
+celerybeat-schedule
+*.sock
+*.lock
+dump.rdb
+node_modules
+
+# Environment-specific files
+.env.live
+venv
+
+# Ignore the entire migrations directory
+/backend/user/migrations/
