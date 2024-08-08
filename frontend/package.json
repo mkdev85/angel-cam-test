@@ -1,0 +1,46 @@
+{
+  "name": "frontend",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "./node_modules/.bin/eslint --ext .js,.jsx,.ts,.tsx src",
+    "lint-fix": "./node_modules/.bin/eslint --fix --ext .js,.jsx,.ts,.tsx src",
+    "prettify": "./node_modules/.bin/prettier --write  src",
+    "ts-check": "tsc --noEmit",
+    "generate": "plop",
+    "prepare": "cd .. && husky install ./.husky"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.13.0",
+    "@emotion/styled": "^11.13.0",
+    "@mui/material": "^5.16.6",
+    "@tanstack/react-query": "^5.51.23",
+    "next": "14.2.5",
+    "react": "^18",
+    "react-dom": "^18"
+  },
+  "devDependencies": {
+    "@trivago/prettier-plugin-sort-imports": "^4.3.0",
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "@typescript-eslint/eslint-plugin": "^6.7.2",
+    "eslint": "^8.49.0",
+    "eslint-config-next": "14.2.5",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-config-standard-with-typescript": "^39.0.0",
+    "eslint-plugin-import": "^2.28.1",
+    "eslint-plugin-n": "^16.1.0",
+    "eslint-plugin-promise": "^6.1.1",
+    "eslint-plugin-react": "^7.33.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "husky": "^8.0.3",
+    "lint-staged": "^14.0.1",
+    "plop": "^4.0.0",
+    "prettier": "3.0.3",
+    "typescript": "^5.2.2"
+  }
+}
