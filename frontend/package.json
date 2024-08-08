@@ -10,18 +10,20 @@
     "lint-fix": "./node_modules/.bin/eslint --fix --ext .js,.jsx,.ts,.tsx src",
     "prettify": "./node_modules/.bin/prettier --write  src",
     "ts-check": "tsc --noEmit",
-    "generate": "plop",
-    "prepare": "cd .. && husky install ./.husky"
+    "generate": "plop"
   },
   "dependencies": {
     "@emotion/react": "^11.13.0",
     "@emotion/styled": "^11.13.0",
+    "@mui/icons-material": "^5.16.6",
     "@mui/material": "^5.16.6",
     "@tanstack/react-query": "^5.51.23",
     "axios": "^1.7.3",
+    "formik": "^2.4.6",
     "next": "14.2.5",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "yup": "^1.4.0"
   },
   "devDependencies": {
     "@trivago/prettier-plugin-sort-imports": "^4.3.0",
@@ -38,7 +40,6 @@
     "eslint-plugin-promise": "^6.1.1",
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
-    "husky": "^8.0.3",
     "lint-staged": "^14.0.1",
     "plop": "^4.0.0",
     "prettier": "3.0.3",
