@@ -73,12 +73,7 @@ Authenticate a user using an access token.
 200 OK: Returns user details and authentication success message.
 json
 {
-    "message": "Login successful",
-    "user": {
-        "id": 1,
-        "username": "john_doe",
-        "email": "john_doe@example.com"
-    }
+    "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJg"
 }
 401 Unauthorized: Invalid or expired token.
 json
