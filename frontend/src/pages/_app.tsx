@@ -1,35 +1,33 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import { ThemeProvider } from '@emotion/react';
-import { HydrationBoundary, QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { HydrationBoundary } from '@tanstack/react-query';
+import { SnackbarProvider } from 'notistack';
 
 import type { AppProps } from 'next/app';
 
+import { CustomQueryClientProvider } from '@angel/hoc/CustomQueryClientProvider';
 import '@angel/styles/globals.css';
+import { AppLayout } from '@angel/ui-kit/components/AppLayout/AppLayout';
 import { defaultTheme } from '@angel/ui-kit/theme';
 
 export default function App({ Component, pageProps }: AppProps) {
-  const [reactQueryClient] = useState(
-    () =>
-      new QueryClient({
-        defaultOptions: {
-          queries: {
-            refetchOnWindowFocus: false,
-            refetchOnMount: false,
-            refetchOnReconnect: false,
-            retry: 1,
-          },
-        },
-      }),
-  );
-
   return (
     <ThemeProvider theme={defaultTheme}>
-      <QueryClientProvider client={reactQueryClient}>
-        <HydrationBoundary state={pageProps.dehydratedState}>
-          <Component {...pageProps} />
-        </HydrationBoundary>
-      </QueryClientProvider>
+      <SnackbarProvider
+        anchorOrigin={{
+          horizontal: 'right',
+          vertical: 'top',
+        }}
+      >
+        <CustomQueryClientProvider>
+          <HydrationBoundary state={pageProps.dehydratedState}>
+            <AppLayout>
+              <Component {...pageProps} />
+            </AppLayout>
+          </HydrationBoundary>
+        </CustomQueryClientProvider>
+      </SnackbarProvider>
     </ThemeProvider>
   );
 }

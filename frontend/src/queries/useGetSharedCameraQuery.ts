@@ -35,7 +35,7 @@ interface SharedCameraResult {
 }
 
 interface SharedCameraBackendResponse {
-  count: 2;
+  count: number;
   next: null;
   previous: null;
   results: SharedCameraResult[];

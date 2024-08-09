@@ -26,6 +26,16 @@ export const SharedCameraPage: React.FC<SharedCameraPageProps> = props => {
     );
   }
 
+  if (sharedCameraData?.count === 0) {
+    return (
+      <Box padding={4}>
+        <Typography align="center" variant="h4" color="red">
+          No Camera Found...
+        </Typography>
+      </Box>
+    );
+  }
+
   return (
     <SharedCameraPageWrapper>
       {sharedCameraData?.results.map(item => (
