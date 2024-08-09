@@ -18,7 +18,7 @@ interface RecordingBackendResponse {
 export function getGetRecordingQuery(params: GetRecordingQueryParams) {
   const queryKey = ['get-recording', params];
   const queryFn = async () => {
-    const response = await api.get(`shared-cameras/${params.cameraId}/recording`);
+    const response = await api.get(`user/shared-cameras/${params.cameraId}/recording/`);
 
     if (!response.data) {
       return Promise.reject(response);

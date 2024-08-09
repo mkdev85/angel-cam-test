@@ -44,7 +44,7 @@ interface SharedCameraBackendResponse {
 export function getGetSharedCameraQuery() {
   const queryKey = ['get-shared-camera'];
   const queryFn = async () => {
-    const response = await api.get('/shared-cameras/');
+    const response = await api.get('/user/cameras/');
 
     if (!response.data) {
       return Promise.reject(response);

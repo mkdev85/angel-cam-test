@@ -27,7 +27,7 @@ export function getGetStreamQuery(params: GetStreamQueryParams) {
   const queryKey = ['get-stream', params];
   const queryFn = async () => {
     const response = await api.get(
-      `/shared-cameras/${cameraId}/recording/stream?start=${start}&end=${end}`,
+      `user/shared-cameras/${cameraId}/recording/stream?start=${start}&end=${end}`,
     );
 
     if (!response.data) {

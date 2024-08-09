@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { MutationCache, QueryCache, QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { QueryCache, QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { useSnackbar } from 'notistack';
 
 export const CustomQueryClientProvider: React.FC<{
@@ -21,14 +21,6 @@ export const CustomQueryClientProvider: React.FC<{
           },
         },
         queryCache: new QueryCache({
-          onError: error => {
-            enqueueSnackbar({
-              message: (error as any)?.response?.data?.detail ?? 'Something went wrong',
-              variant: 'error',
-            });
-          },
-        }),
-        mutationCache: new MutationCache({
           onError: error => {
             enqueueSnackbar({
               message: (error as any)?.response?.data?.detail ?? 'Something went wrong',

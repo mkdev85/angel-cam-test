@@ -1,5 +1,7 @@
 import type { AxiosError, AxiosResponse, InternalAxiosRequestConfig } from 'axios';
 
+import Auth from './auth';
+
 export const handleResponse = (response: AxiosResponse) => {
   return response;
 };
@@ -18,7 +20,10 @@ export const handleResponseError = (error: AxiosError) => {
 };
 
 export const handleRequest = (config: InternalAxiosRequestConfig) => {
-  config.headers.Authorization = `PersonalAccessToken 7e8ef344f958481e8e19094328e526da709c9266`;
+  const token = Auth.getToken;
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
   return config;
 };
 

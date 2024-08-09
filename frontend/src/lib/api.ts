@@ -7,7 +7,7 @@ import {
   handleResponseError,
 } from './interceptors';
 
-const BASE_URL = 'https://api.angelcam.com/v1';
+const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 
 const api = axios.create({
   baseURL: BASE_URL,

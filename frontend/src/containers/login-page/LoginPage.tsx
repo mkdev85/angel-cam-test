@@ -1,11 +1,12 @@
 import React from 'react';
 
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import { Avatar, Box, Button, TextField, Typography } from '@mui/material';
+import { Avatar, Box, TextField, Typography } from '@mui/material';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 
-import { useRoutes } from '@angel/hooks/useRoutes';
+import { useSignupMutation } from '@angel/queries/useSignInMutation';
+import { Button } from '@angel/ui-kit/components/Button/Button';
 
 import type { LoginPageProps } from './LoginPage.props';
 import { LoginPageWrapper } from './LoginPage.styles';
@@ -15,15 +16,15 @@ const SigninSchema = Yup.object().shape({
 });
 
 export const LoginPage: React.FC<LoginPageProps> = props => {
-  const { gotoSharedCameraPage } = useRoutes();
+  const signinMutation = useSignupMutation();
 
   const formik = useFormik({
     initialValues: {
       pat: '',
     },
     validationSchema: SigninSchema,
-    onSubmit: value => {
-      gotoSharedCameraPage();
+    onSubmit: async value => {
+      await signinMutation.mutateAsync({ token: value.pat });
     },
   });
 
@@ -50,7 +51,14 @@ export const LoginPage: React.FC<LoginPageProps> = props => {
           helperText={formik.touched.pat && formik.errors.pat}
         />
 
-        <Button type="submit" fullWidth variant="contained" className="button">
+        <Button
+          type="submit"
+          fullWidth
+          variant="contained"
+          className="button"
+          loading={signinMutation.isPending}
+          disabled={signinMutation.isPending}
+        >
           Sign In
         </Button>
       </Box>

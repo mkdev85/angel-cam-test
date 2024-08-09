@@ -18,7 +18,7 @@ export const RecordingSection: React.FC<RecordingSectionProps> = props => {
 
   const [recordingTime, setRecordingTime] = useState<RecordingTime | null>(null);
 
-  const { data: recordingData, isLoading } = useGetRecordingQuery({ cameraId });
+  const { data: recordingData, isLoading, isError } = useGetRecordingQuery({ cameraId });
   const { recording_start: recordingStart, recording_end: recordingEnd } = recordingData ?? {};
 
   const recordingList = getDailyRecordingTime(recordingStart, recordingEnd)?.reverse();
@@ -35,10 +35,20 @@ export const RecordingSection: React.FC<RecordingSectionProps> = props => {
     );
   }
 
+  if (isError) {
+    return (
+      <Box padding={4}>
+        <Typography align="center" variant="h6" color="red">
+          Something went wrong. Can't load recording details section.
+        </Typography>
+      </Box>
+    );
+  }
+
   return (
     <RecordingSectionWrapper>
       <Box className="recording-list">
-        <Typography variant="h4">Recording time</Typography>
+        <Typography variant="h4">Recording details</Typography>
 
         <FormControl className="dropdown-wrapper">
           <InputLabel id="segment-select-label">Date</InputLabel>

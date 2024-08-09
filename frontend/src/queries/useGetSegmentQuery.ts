@@ -26,7 +26,7 @@ export function getGetSegmentQuery(params: GetSegmentQueryParams) {
   const queryKey = ['get-segment', params];
   const queryFn = async () => {
     const response = await api.get(
-      `shared-cameras/${cameraId}/recording/timeline?start=${start}&end=${end}`,
+      `user/shared-cameras/${cameraId}/recording/timeline?start=${start}&end=${end}`,
     );
 
     if (!response.data) {
