@@ -14,7 +14,7 @@ export const getDailyRecordingTime = (
 
   while (currentStartTime < endDate) {
     const currentEndTime = new Date(currentStartTime);
-    currentEndTime.setDate(currentEndTime.getDate() + 1);
+    currentEndTime.setHours(currentEndTime.getHours() + 12);
 
     if (currentEndTime > endDate) {
       currentEndTime.setTime(endDate.getTime());

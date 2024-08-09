@@ -50,8 +50,8 @@ export const RecordingSection: React.FC<RecordingSectionProps> = props => {
           >
             {recordingList?.map((item, index) => (
               <MenuItem key={index} value={JSON.stringify(item)}>
-                {moment(item.start).format('Do MMM, YYYY - HH:mm:ss')} to{' '}
-                {moment(item.end).format('Do MMM, YYYY - HH:mm:ss')}
+                {moment(item.start).utc().format('Do MMM, YYYY - HH:mm:ss')} to{' '}
+                {moment(item.end).utc().format('Do MMM, YYYY - HH:mm:ss')}
               </MenuItem>
             ))}
           </Select>

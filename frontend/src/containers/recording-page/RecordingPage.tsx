@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import ReactPlayer from 'react-player';
 
 import { Box, Typography } from '@mui/material';
 
@@ -9,7 +10,8 @@ import type { RecordingPageProps } from './RecordingPage.props';
 import { RecordingPageWrapper } from './RecordingPage.styles';
 import { RecordingSection } from './components/RecordingSection/RecordingSection';
 
-const VIDEO_FORMAT = 'mjpeg';
+const VIDEO_FORMAT_MJPEG = 'mjpeg';
+const VIDEO_FORMAT_HLS = 'hls';
 const PLACEHOLDER_VIDEO = '/images/video-placeholder.gif';
 
 export const RecordingPage: React.FC<RecordingPageProps> = props => {
@@ -19,7 +21,11 @@ export const RecordingPage: React.FC<RecordingPageProps> = props => {
   const { data: sharedCameraData, isLoading, isError } = useGetSharedCameraQuery();
 
   const currentCamera = sharedCameraData?.results.find(item => item.id === Number(cameraId));
-  const videoStream = currentCamera?.streams.find(stream => stream.format === VIDEO_FORMAT);
+  const videoStreamMjpeg = currentCamera?.streams.find(
+    stream => stream.format === VIDEO_FORMAT_MJPEG,
+  );
+
+  const videoStreamHls = currentCamera?.streams.find(stream => stream.format === VIDEO_FORMAT_HLS);
 
   if (isLoading) {
     return <PageLoading />;
@@ -37,13 +43,19 @@ export const RecordingPage: React.FC<RecordingPageProps> = props => {
 
   return (
     <RecordingPageWrapper>
-      {videoStream?.url && (
-        <img
-          src={videoSrc}
-          onLoad={() => setVideoSrc(videoStream.url)}
-          onError={() => setVideoSrc(PLACEHOLDER_VIDEO)}
-          className="video-stream"
-        />
+      {videoStreamHls ? (
+        <ReactPlayer url={videoStreamHls?.url} controls width="100%" height={640} playing={true} />
+      ) : (
+        <>
+          {videoStreamMjpeg && (
+            <img
+              src={videoSrc}
+              onLoad={() => setVideoSrc(videoStreamMjpeg.url)}
+              onError={() => setVideoSrc(PLACEHOLDER_VIDEO)}
+              className="video-stream"
+            />
+          )}
+        </>
       )}
 
       <Box paddingY={10}>

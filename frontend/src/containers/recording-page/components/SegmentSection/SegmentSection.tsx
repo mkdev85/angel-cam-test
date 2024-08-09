@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Box } from '@mui/material';
+import { Box, Grid } from '@mui/material';
 
 import { useGetSegmentQuery } from '@angel/queries/useGetSegmentQuery';
 import { Loader } from '@angel/ui-kit/components/Loader/Loader';
@@ -26,7 +26,13 @@ export const SegmentSection: React.FC<SegmentSectionProps> = props => {
 
   return (
     <SegmentSectionWrapper>
-      {segmentData?.segments.map(item => <SegmentCard key={item.start} />)}
+      <Grid container spacing={3} paddingTop={2}>
+        {segmentData?.segments.map(item => (
+          <Grid item xs={12} sm={6} key={item.start}>
+            <SegmentCard key={item.start} cameraId={cameraId} start={item.start} end={item.end} />
+          </Grid>
+        ))}
+      </Grid>
     </SegmentSectionWrapper>
   );
 };
