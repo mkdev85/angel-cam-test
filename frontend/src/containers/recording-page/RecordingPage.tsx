@@ -50,7 +50,9 @@ export const RecordingPage: React.FC<RecordingPageProps> = props => {
         {currentCamera?.has_recording ? (
           <RecordingSection cameraId={currentCamera.id} />
         ) : (
-          <Typography>Has no recording</Typography>
+          <Typography variant="h4" align="center">
+            Has no recording
+          </Typography>
         )}
       </Box>
     </RecordingPageWrapper>

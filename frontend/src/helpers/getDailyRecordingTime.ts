@@ -1,7 +1,4 @@
-interface RecordingTime {
-  start: string;
-  end: string;
-}
+import type { RecordingTime } from '@angel/interfaces/RecordingTime';
 
 export const getDailyRecordingTime = (
   startTime?: string,
