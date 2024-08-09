@@ -35,6 +35,11 @@ Once `pip` has finished downloading the dependencies:
 
 This document provides an overview of the backend API endpoints, including details about each endpoint, request methods, headers, request bodies, query parameters, and expected responses.
 
+**Note:**  
+Our application uses a SQLite database, a lightweight, file-based system suitable for many use cases.
+
+For security reasons, we do not expose the personalAccessToken to the frontend. Instead, we use JSON Web Tokens (JWT) for authentication and authorization. The backend verifies user identity by checking the presence of the user ID in the database. If the user ID is not found, the system returns an error response. If the user ID exists, a success response is sent, ensuring secure access to resources.
+
 ## Table of Contents
 
 - [POST LOGIN](#post-login)
