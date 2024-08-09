@@ -18,16 +18,16 @@ export const CameraCard: React.FC<CameraCardProps> = props => {
       <Card className="camera-card" onClick={() => gotoRecordingPage(cameraId)}>
         <CardHeader title={title} subheader={`Status: ${status}`} />
 
-        <Image
-          alt={title}
-          src={thumbnail}
-          layout="responsive"
-          width={16}
-          height={9}
-          objectFit="cover"
-          placeholder="blur"
-          blurDataURL="/images/image-placeholder.png"
-        />
+        <div className="image-wrapper">
+          <Image
+            alt={title}
+            src={thumbnail}
+            layout="fill"
+            objectFit="cover"
+            placeholder="blur"
+            blurDataURL="/images/image-placeholder.png"
+          />
+        </div>
 
         <CardContent>
           <Typography variant="h6">Owner Details</Typography>

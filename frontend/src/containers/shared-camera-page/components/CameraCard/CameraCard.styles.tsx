@@ -6,4 +6,9 @@ export const CameraCardWrapper = styled('div')(({ theme }) => ({
   '& .camera-card': {
     cursor: 'pointer',
   },
+  '& .image-wrapper': {
+    position: 'relative',
+    width: '100%',
+    paddingBottom: '56.25%',
+  },
 }));
