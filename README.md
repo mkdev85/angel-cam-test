@@ -77,9 +77,8 @@ json
 }
 401 Unauthorized: Invalid or expired token.
 json
-Copy code
 {
-    "error": "Invalid token"
+    "error": "Invalid token please login again"
 }
 ```
 **Endpoint:**  
@@ -97,19 +96,28 @@ Response:
 
 200 OK: User information retrieved successfully.
 json
-Copy code
 {
     "id": 1,
-    "username": "john_doe",
-    "email": "john_doe@example.com",
-    "full_name": "John Doe",
-    "joined_date": "2024-01-15"
+    "angel_cam_id": "216577",
+    "email": "mkdev8585@gmail.com",
+    "first_name": "Mayank",
+    "last_name": "Kumar",
+    "phone": null,
+    "my_cameras_count": 0,
+    "shared_cameras_count": 2,
+    "total_cameras_count": 2,
+    "cameras_with_guests_count": 0,
+    "root_site": 213606,
+    "require_qualification": false,
+    "available_features": {
+        "live_view": true,
+        "connect_camera": true
+    }
 }
 401 Unauthorized: Invalid or missing token.
 json
-Copy code
 {
-    "error": "Unauthorized access"
+    "error": "Invalid token please login again"
 }
 ```
 **GET CAMERAS**
@@ -126,26 +134,75 @@ Response:
 
 200 OK: List of cameras retrieved successfully.
 json
-Copy code
 {
-    "cameras": [
-        {
-            "id": 112859,
-            "name": "Front Door",
-            "status": "online"
-        },
+    "count": 2,
+    "next": null,
+    "previous": null,
+    "results": [
         {
             "id": 112860,
-            "name": "Backyard",
-            "status": "offline"
+            "name": "Sample",
+            "type": "mjpeg",
+            "snapshot": {
+                "url": "https://d1bkj0vwu8cp7q.cloudfront.net/snapshot/112860/20240809-130721-5a4a997f-cad1-4d4f-be46-ad8bed7fb159.jpg",
+                "created_at": "2024-08-09T13:07:21Z"
+            },
+            "status": "online",
+            "live_snapshot": "https://m4-eu8.angelcam.com/cameras/112860/snapshots/snapshot.jpg?token=eyJjYW1lcmFfaWQiOiIxMTI4NjAiLCJkZXZpY2VfaWQiOiIxMTI4NjAiLCJ0aW1lIjoxNzIzMjA5MjE0NjUyMjMxLCJ0aW1lb3V0IjoxMjB9%2E3e01d79b74d88ec877cb96346a63eac0be0b19b83164ca2c2cc24cf10a305a18",
+            "streams": [
+                {
+                    "format": "mjpeg",
+                    "url": "https://m4-eu8.angelcam.com/cameras/112860/streams/mjpeg/stream.mjpeg?token=eyJjYW1lcmFfaWQiOiIxMTI4NjAiLCJkZXZpY2VfaWQiOiIxMTI4NjAiLCJ0aW1lIjoxNzIzMjA5MjE0NjUyMzE2LCJ0aW1lb3V0IjoxMjB9%2E02ec9037bfff741a9c1c43b5eaa904b5be6aa3b2707d297187ec0033ff52253c"
+                }
+            ],
+            "applications": [],
+            "owner": {
+                "email": "hiring@angelcam.com",
+                "first_name": "Angelcam",
+                "last_name": "Hiring"
+            },
+            "has_recording": false,
+            "has_notifications": false,
+            "audio_enabled": true,
+            "low_latency_enabled": true
+        },
+        {
+            "id": 112859,
+            "name": "Street",
+            "type": "h264",
+            "snapshot": {
+                "url": "https://d1bkj0vwu8cp7q.cloudfront.net/snapshot/112859/20240809-130721-f0c7bc61-e2c7-4f82-bdfd-5848c46f12be.jpg",
+                "created_at": "2024-08-09T13:07:21Z"
+            },
+            "status": "online",
+            "live_snapshot": "https://m3-eu8.angelcam.com/cameras/112859/snapshots/snapshot.jpg?token=eyJjYW1lcmFfaWQiOiIxMTI4NTkiLCJkZXZpY2VfaWQiOiIxMTI4NTkiLCJ0aW1lIjoxNzIzMjA5MjE0NjY3NTIwLCJ0aW1lb3V0IjoxMjB9%2E0142a448aac7936606f723caf7e87c91dd3eec5bcc9bf10cf5bc71df65da02af",
+            "streams": [
+                {
+                    "format": "mjpeg",
+                    "url": "https://m3-eu8.angelcam.com/cameras/112859/streams/mjpeg/stream.mjpeg?token=eyJjYW1lcmFfaWQiOiIxMTI4NTkiLCJkZXZpY2VfaWQiOiIxMTI4NTkiLCJ0aW1lIjoxNzIzMjA5MjE0NjY3NjI1LCJ0aW1lb3V0IjoxMjB9%2Ef721b25bf0e004c713c47c597930c08bc517c77c9b2daa7e9e0025ef4dc40b8d"
+                },
+            ],
+            "applications": [
+                {
+                    "code": "CRA"
+                }
+            ],
+            "owner": {
+                "email": "hiring@angelcam.com",
+                "first_name": "Angelcam",
+                "last_name": "Hiring"
+            },
+            "has_recording": true,
+            "has_notifications": false,
+            "audio_enabled": true,
+            "low_latency_enabled": true
         }
     ]
 }
 401 Unauthorized: Invalid or missing token.
 json
-Copy code
 {
-    "error": "Unauthorized access"
+    "error": "Invalid token please login again"
 }
 ```
 **GET RECORDING**
@@ -162,29 +219,17 @@ Response:
 
 200 OK: Recording data retrieved successfully.
 json
-Copy code
 {
-    "recordings": [
-        {
-            "id": 1,
-            "camera_id": 112859,
-            "start_time": "2024-08-05T10:00:00Z",
-            "end_time": "2024-08-05T11:00:00Z",
-            "url": "http://example.com/recording1.mp4"
-        },
-        {
-            "id": 2,
-            "camera_id": 112859,
-            "start_time": "2024-08-05T12:00:00Z",
-            "end_time": "2024-08-05T13:00:00Z",
-            "url": "http://example.com/recording2.mp4"
-        }
-    ]
+    "status": "READY",
+    "retention": "P3D",
+    "deactivated_at": null,
+    "recording_start": "2024-08-06T12:37:02Z",
+    "recording_end": "2024-08-09T13:09:37Z"
 }
 401 Unauthorized: Invalid or missing token.
 json
 {
-    "error": "Unauthorized access"
+    "error": "Invalid token please login again"
 }
 ```
 **GET TIMELINE**
@@ -206,22 +251,34 @@ Response:
 
 200 OK: Timeline data retrieved successfully.
 json: {
-    "timeline": [
+    "start": "2024-08-06T12:37:02Z",
+    "end": "2024-08-07T13:09:37Z",
+    "segments": [
         {
-            "start": "2024-08-05T01:00:00Z",
-            "end": "2024-08-05T01:30:00Z",
-            "type": "motion"
+            "start": "2024-08-06T13:37:02Z",
+            "end": "2024-08-06T13:39:38Z"
         },
         {
-            "start": "2024-08-05T02:00:00Z",
-            "end": "2024-08-05T02:45:00Z",
-            "type": "continuous"
+            "start": "2024-08-06T14:07:02Z",
+            "end": "2024-08-06T14:09:38Z"
+        },
+        {
+            "start": "2024-08-06T14:37:02Z",
+            "end": "2024-08-06T14:39:38Z"
+        },
+        {
+            "start": "2024-08-06T15:07:02Z",
+            "end": "2024-08-06T15:09:38Z"
+        },
+        {
+            "start": "2024-08-06T15:37:02Z",
+            "end": "2024-08-06T15:39:38Z"
         }
     ]
 }
 401 Unauthorized: Invalid or missing token.
 json: {
-    "error": "Unauthorized access"
+    "error": "Invalid token please login again"
 }
 ```
 **GET STREAMDATA**
@@ -244,12 +301,20 @@ Response:
 200 OK: Streaming data retrieved successfully.
 json: 
 {
-    "stream_url": "http://example.com/stream.m3u8"
+    "format": "hls",
+    "url": "https://e3-eu2.angelcam.com/recording/streams/141745b8-4f66-47ed-a4c2-7be087d04fe7/hls/playlist.m3u8",
+    "stream_info": "https://api.angelcam.com/v1/recording/stream/e3-eu2.angelcam.com/141745b8-4f66-47ed-a4c2-7be087d04fe7/",
+    "stream_controls": {
+        "base_url": "https://e3-eu2.angelcam.com/recording/streams/141745b8-4f66-47ed-a4c2-7be087d04fe7/",
+        "play": "https://e3-eu2.angelcam.com/recording/streams/141745b8-4f66-47ed-a4c2-7be087d04fe7/play/",
+        "pause": "https://e3-eu2.angelcam.com/recording/streams/141745b8-4f66-47ed-a4c2-7be087d04fe7/pause/",
+        "speed": "https://e3-eu2.angelcam.com/recording/streams/141745b8-4f66-47ed-a4c2-7be087d04fe7/speed/"
+    }
 }
 401 Unauthorized: Invalid or missing token.
 json
 {
-    "error": "Unauthorized access"
+    "error": "Invalid token please login again"
 }
 ```
 
@@ -268,19 +333,36 @@ Response:
 200 OK: Camera details retrieved successfully.
 json: 
 {
-    "camera": {
-        "id": 112860,
-        "name": "Backyard",
-        "status": "offline",
-        "resolution": "1080p",
-        "location": "Backyard - North Corner",
-        "last_online": "2024-08-01T12:30:00Z"
-    }
+    "id": 112860,
+    "name": "Sample",
+    "type": "mjpeg",
+    "snapshot": {
+        "url": "https://d1bkj0vwu8cp7q.cloudfront.net/snapshot/112860/20240809-130721-5a4a997f-cad1-4d4f-be46-ad8bed7fb159.jpg",
+        "created_at": "2024-08-09T13:07:21Z"
+    },
+    "status": "online",
+    "live_snapshot": "https://m4-eu8.angelcam.com/cameras/112860/snapshots/snapshot.jpg?token=eyJjYW1lcmFfaWQiOiIxMTI4NjAiLCJkZXZpY2VfaWQiOiIxMTI4NjAiLCJ0aW1lIjoxNzIzMjA5NTMwMDgzNTY0LCJ0aW1lb3V0IjoxMjB9%2E2b3ec9a120500e33c1df570354ee31b2823309dffeb76d2e73166e27cd158646",
+    "streams": [
+        {
+            "format": "mjpeg",
+            "url": "https://m4-eu8.angelcam.com/cameras/112860/streams/mjpeg/stream.mjpeg?token=eyJjYW1lcmFfaWQiOiIxMTI4NjAiLCJkZXZpY2VfaWQiOiIxMTI4NjAiLCJ0aW1lIjoxNzIzMjA5NTMwMDgzNjc4LCJ0aW1lb3V0IjoxMjB9%2E4e9953621d06403374a09d7a043a58dd31898146e81bb9961585db7cf7352f04"
+        }
+    ],
+    "applications": [],
+    "owner": {
+        "email": "hiring@angelcam.com",
+        "first_name": "Angelcam",
+        "last_name": "Hiring"
+    },
+    "has_recording": false,
+    "has_notifications": false,
+    "audio_enabled": true,
+    "low_latency_enabled": true
 }
 401 Unauthorized: Invalid or missing token.
 json:
 {
-    "error": "Unauthorized access"
+    "error": "Invalid token please login again"
 }
 ```
 
