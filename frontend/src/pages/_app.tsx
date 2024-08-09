@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 import { ThemeProvider } from '@emotion/react';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { HydrationBoundary, QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 import type { AppProps } from 'next/app';
 
@@ -25,7 +25,9 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <ThemeProvider theme={defaultTheme}>
       <QueryClientProvider client={reactQueryClient}>
-        <Component {...pageProps} />
+        <HydrationBoundary state={pageProps.dehydratedState}>
+          <Component {...pageProps} />
+        </HydrationBoundary>
       </QueryClientProvider>
     </ThemeProvider>
   );
