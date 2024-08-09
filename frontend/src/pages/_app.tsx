@@ -17,6 +17,7 @@ export default function App({ Component, pageProps }: AppProps) {
             refetchOnWindowFocus: false,
             refetchOnMount: false,
             refetchOnReconnect: false,
+            retry: 1,
           },
         },
       }),

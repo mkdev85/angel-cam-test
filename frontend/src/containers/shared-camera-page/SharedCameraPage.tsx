@@ -31,6 +31,7 @@ export const SharedCameraPage: React.FC<SharedCameraPageProps> = props => {
       {sharedCameraData?.results.map(item => (
         <CameraCard
           key={item.id}
+          cameraId={item.id}
           title={item.name}
           ownerFirstName={item.owner.first_name}
           ownerLastName={item.owner.last_name}

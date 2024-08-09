@@ -66,6 +66,7 @@ export function useGetSharedCameraQuery(
   const query = useQuery({
     queryKey,
     queryFn,
+    staleTime: 2 * 60 * 1000,
     ...options,
   });
 

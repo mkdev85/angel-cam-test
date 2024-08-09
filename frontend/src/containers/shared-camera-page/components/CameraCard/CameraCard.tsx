@@ -4,15 +4,18 @@ import { Card, CardContent, CardHeader, Typography } from '@mui/material';
 
 import Image from 'next/image';
 
+import { useRoutes } from '@angel/hooks/useRoutes';
+
 import type { CameraCardProps } from './CameraCard.props';
 import { CameraCardWrapper } from './CameraCard.styles';
 
 export const CameraCard: React.FC<CameraCardProps> = props => {
-  const { title, status, thumbnail, ownerFirstName, ownerLastName, ownerEmail } = props;
+  const { title, cameraId, status, thumbnail, ownerFirstName, ownerLastName, ownerEmail } = props;
+  const { gotoRecordingPage } = useRoutes();
 
   return (
     <CameraCardWrapper>
-      <Card>
+      <Card className="camera-card" onClick={() => gotoRecordingPage(cameraId)}>
         <CardHeader title={title} subheader={`Status: ${status}`} />
 
         <Image

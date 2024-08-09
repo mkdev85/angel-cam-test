@@ -44,6 +44,8 @@ export const useRoutes = () => {
     ...routes, // Include the predefined routes for easy access
     gotoLoginPage: async () => gotoRoute(routes.loginPage),
     gotoSharedCameraPage: async () => gotoRoute(routes.sharedCameraPage),
+    gotoRecordingPage: async (cameraId: number) =>
+      gotoRoute(routes.recordingPage, { params: { cameraId } }),
   };
 };
 

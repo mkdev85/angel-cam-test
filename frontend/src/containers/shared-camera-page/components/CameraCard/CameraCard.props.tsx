@@ -1,4 +1,5 @@
 export interface CameraCardProps {
+  cameraId: number;
   title: string;
   ownerFirstName: string;
   ownerLastName: string;
