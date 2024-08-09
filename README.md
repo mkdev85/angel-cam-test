@@ -21,10 +21,12 @@ Then install the dependencies:
 ```sh
 (env)$ pip install -r requirements.txt
 ```
+
 Note the `(env)` in front of the prompt. This indicates that this terminal
 session operates in a virtual environment set up by `virtualenv2`.
 
 Once `pip` has finished downloading the dependencies:
+
 ```sh
 (env)$ python manage.py makemigrations
 (env)$ python manage.py migrate
@@ -61,14 +63,16 @@ For security reasons, we do not expose the personalAccessToken to the frontend. 
 **Description:**  
 Authenticate a user using an access token.
 
-**Request Body:**  
+**Request Body:**
+
 ```json
 {
-    "token": "7e8ef344f958481e8e19094328e526da709c9266"
+  "token": "7e8ef344f958481e8e19094328e526da709c9266"
 }
 ```
 
 **Response:**
+
 ```
 200 OK: Returns user details and authentication success message.
 json
@@ -81,13 +85,15 @@ json
     "error": "Invalid token please login again"
 }
 ```
+
 **Endpoint:**  
 `GET http://localhost:8000/user/info/
 
-**Description:***
+**Description:\***
 Retrieve information about the authenticated user.
 
-**Request Headers:***
+**Request Headers:\***
+
 ```
 Key	Value
 Authorization	Bearer <access_token>
@@ -120,6 +126,7 @@ json
     "error": "Invalid token please login again"
 }
 ```
+
 **GET CAMERAS**
 `Endpoint:GET http://localhost:8000/user/cameras/
 
@@ -127,6 +134,7 @@ json
 Fetch a list of cameras available to the authenticated user.
 
 **Request Headers:**
+
 ```
 Key	Value
 Authorization	Bearer <access_token>
@@ -205,6 +213,7 @@ json
     "error": "Invalid token please login again"
 }
 ```
+
 **GET RECORDING**
 `Endpoint:GET http://localhost:8000/user/shared-cameras/112859/recording
 
@@ -212,6 +221,7 @@ json
 Access the recordings for a specific shared camera.
 
 Request Headers:
+
 ```
 Key	Value
 Authorization	Bearer <access_token>
@@ -232,6 +242,7 @@ json
     "error": "Invalid token please login again"
 }
 ```
+
 **GET TIMELINE**
 `Endpoint: GET http://localhost:8000/user/shared-cameras/112859/recording/timeline/?start=2024-08-05T00:00:00.000Z&end=2024-08-05T23:59:59.000Z
 
@@ -239,6 +250,7 @@ json
 Get a timeline of recordings for a shared camera within a specified time range.
 
 **Request Headers:**
+
 ```
 Key	Value
 Authorization	Bearer <access_token>
@@ -281,6 +293,7 @@ json: {
     "error": "Invalid token please login again"
 }
 ```
+
 **GET STREAMDATA**
 `Endpoint: GET http://localhost:8000/user/shared-cameras/112859/recording/stream?start=2024-08-05T00:07:37Z&end=2024-08-05T00:09:37Z
 
@@ -288,6 +301,7 @@ json: {
 Stream recording data for a specific shared camera between the given timestamps.
 
 **Request Headers:**
+
 ```
 Key	Value
 Authorization	Bearer <access_token>
@@ -299,7 +313,7 @@ end	End time for streaming	2024-08-05T00:09:37Z
 Response:
 
 200 OK: Streaming data retrieved successfully.
-json: 
+json:
 {
     "format": "hls",
     "url": "https://e3-eu2.angelcam.com/recording/streams/141745b8-4f66-47ed-a4c2-7be087d04fe7/hls/playlist.m3u8",
@@ -325,13 +339,14 @@ json
 Retrieve details for a specific camera.
 
 **Request Headers:**
+
 ```
 Key	Value
 Authorization	Bearer <access_token>
 Response:
 
 200 OK: Camera details retrieved successfully.
-json: 
+json:
 {
     "id": 112860,
     "name": "Sample",
@@ -369,33 +384,39 @@ json:
 ### Explanation of Each Section:
 
 1. **POST LOGIN**:
+
    - **Endpoint**: Provides the URL for the login API.
    - **Description**: Describes the purpose of the API.
    - **Request Body**: Includes a JSON example of the request payload.
    - **Response**: Details possible success and error responses with example JSON structures.
 
 2. **GET USERINFO**:
+
    - **Endpoint**: URL to get user information.
    - **Request Headers**: Lists necessary headers for the request.
    - **Response**: Example responses for success and error cases.
 
 3. **GET CAMERAS**:
+
    - **Endpoint**: URL for fetching the list of cameras.
    - **Request Headers**: Required headers for authorization.
    - **Response**: Shows examples of success and unauthorized access responses.
 
 4. **GET RECORDING**:
+
    - **Endpoint**: URL for accessing camera recordings.
    - **Request Headers**: Required authorization headers.
    - **Response**: Example JSON response for success and error scenarios.
 
 5. **GET TIMELINE**:
+
    - **Endpoint**: URL to retrieve a timeline of recordings.
    - **Request Headers**: Lists required headers.
    - **Query Parameters**: Parameters needed for the timeline query.
    - **Response**: Example response for retrieving timeline data.
 
 6. **GET STREAMDATA**:
+
    - **Endpoint**: URL to stream recording data.
    - **Request Headers**: Necessary headers for authorization.
    - **Query Parameters**: Details on query parameters for streaming.
@@ -405,3 +426,77 @@ json:
    - **Endpoint**: URL to get specific camera details.
    - **Request Headers**: Required headers for the request.
    - **Response**: Shows possible responses for success and unauthorized access.
+
+## Frontend Setup
+
+### Steps to Set Up the Project:
+
+1. **Install Dependencies**:
+
+   - Run `npm i` to install all the required dependencies.
+
+2. **Configure Environment Variables**:
+
+   - After installing the dependencies, update the environment variables in `frontend/.env`.
+   - Example: `NEXT_PUBLIC_API_URL=http://127.0.0.1:8000`
+   - **Note**: Ensure the backend server is set up as mentioned in the previous steps to provide the correct backend endpoint address.
+
+3. **Run the Project**:
+   - To run the project in the development environment, execute `npm run dev`.
+
+### Main Libraries Used:
+
+- **Next.js**
+- **TypeScript**
+- **Notistack**
+- **React Query**
+- **React Player**
+- **Material-UI**
+
+### Tools for Code Consistency:
+
+- **Plop.js**: Automates the generation of components and React Query files.
+- **Prettier**: Formats the code for consistent styling.
+- **ESLint**: Enforces coding standards and identifies potential errors.
+
+### Implementation Plan:
+
+- **Login Page [`/`]**:
+
+  - The user enters a personal access token to log in.
+  - Upon successful login, the user is redirected to the Cameras page.
+
+- **Shared Camera Page [`/shared-camera`]**:
+
+  - Displays all shared cameras with their respective snapshots.
+
+- **Live Video Page [`/shared-camera/:cameraId`]**:
+
+  - Displays the live stream of the selected camera.
+  - If we have recordings then we are displaying the recorded segments.
+  - We have various segments as per the date range. So we have added filtering as per the date range. I'm doing the following:
+
+  **API Integration**:
+
+  - Calls the `/recordings` API to retrieve recording details.
+  - Example response:
+    ```json
+    {
+      "status": "RECORDING",
+      "retention": "P3D",
+      "deactivated_at": null,
+      "recording_start": "2024-08-06T02:07:38Z",
+      "recording_end": "2024-08-09T08:09:02Z"
+    }
+    ```
+  - **Segment Handling**:
+    - The overall duration between `recording_start` and `recording_end` is divided into 12-hour segments.
+    - This approach minimizes API calls and optimizes rendering.
+    - Date ranges are displayed in a dropdown, with segment details shown based on the selected duration.
+
+### Frontend Improvements:
+
+- Implement pagination on the `/shared-camera` page.
+- Add pagination on the `/shared-camera/:cameraId` page to manage the display of recorded segments, reducing network bandwidth usage.
+- Enhance responsive design to improve user experience across different devices.
+- Implement playback speed control for video streams.
