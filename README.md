@@ -5,7 +5,7 @@
 The first thing to do is to clone the repository:
 
 ```sh
-$ git clone https://gitlab.com/grepruby/projects/internal/angel-cam-test.git
+$ git clone https://github.com/mkdev85/angel-cam-test.git
 $ cd angel-cam-tes/backend
 ```
 
